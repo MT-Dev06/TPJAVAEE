@@ -9,7 +9,7 @@ public class Commande {
 	private double montant;
 	private String modePaiement;
 	private String statuPaiement;
-	private String modeLivraison;
+	private String modeLivraison;	
 	private String statuLivraison;
 
 	public Client getClient() {
