@@ -10,57 +10,64 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mt.beans.Client;
 
-@WebServlet("/CreationClient")
+@WebServlet( "/CreationClient" )
 public class CreationClient extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long   serialVersionUID = 1L;
 
-	public CreationClient() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    private static final String CHAMP_NOM        = "nomClient";
+    private static final String CHAMP_prenom     = "prenomClient";
+    private static final String CHAMP_ADRESSE    = "adresseClient";
+    private static final String CHAMP_TEL        = "telephoneClient";
+    private static final String CHAMP_EMAIL      = "emailClient";
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    private static final String ATT_MESSAGE      = "message";
+    private static final String ATT_CLIENT       = "client";
+    private static final String ATT_ERREUR       = "erreur";
+    private static final String VUE              = "/AfficheClient.jsp";
 
-		System.out.println("test ---------------------------");
+    public CreationClient() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-		// to send to the the AfficheClient
-		String message = "";
-		Client client = new Client();
-		// --------------------------------------------------------------
-		String temp = "";
+    protected void doGet( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
 
-		String nomClient = request.getParameter("nomClient");
-		String prenomClient = request.getParameter("prenomClient");
-		String adresseClient = request.getParameter("adresseClient");
-		String telephoneClient = request.getParameter("telephoneClient");
-		String emailClient = request.getParameter("emailClient");
+        String message = "";
+        Client client = new Client();
+        boolean erreur = true;
 
-		client.setNom(nomClient);
-		client.setPrenom(prenomClient);
-		client.setAdresse(adresseClient);
-		client.setTelephone(telephoneClient);
-		client.setEmail(emailClient);
+        String nomClient = request.getParameter( CHAMP_NOM );
+        String prenomClient = request.getParameter( CHAMP_prenom );
+        String adresseClient = request.getParameter( CHAMP_ADRESSE );
+        String telephoneClient = request.getParameter( CHAMP_TEL );
+        String emailClient = request.getParameter( CHAMP_EMAIL );
 
-		if (nomClient.isEmpty())
-			temp += "Le nom est obligatoire ";
-		if (adresseClient.isEmpty())
-			temp += "L'adresse de livraion est oblifatoire";
-		if (telephoneClient.isEmpty())
-			temp += "Le telephone est obligatoire";
-		temp += "<br/> <a href=\"CreerClient.jsp\"> cliquez ici </a> pour accéder au formulaire de création d'un client";
-		message = temp.isEmpty() ? "Success" : "echec : " + temp;
+        client.setNom( nomClient );
+        client.setPrenom( prenomClient );
+        client.setAdresse( adresseClient );
+        client.setTelephone( telephoneClient );
+        client.setEmail( emailClient );
 
-		request.setAttribute("message", message);
-		request.setAttribute("client", client);
+        if ( nomClient.trim().isEmpty() || adresseClient.trim().isEmpty() || telephoneClient.trim().isEmpty() ) {
+            erreur = true;
+            message = "erreur - vous n'avez pas rempli tous les champs obligatoire <br/> "
+                    + "<a href =\"CreerClient.jsp\">Cliquez ici</a> pour accéder au formulaire de création d'un client";
+        } else {
+            erreur = false;
+            message = "Client crée avec succés";
+        }
 
-		this.getServletContext().getRequestDispatcher("/AfficheClient.jsp").forward(request, response);
+        request.setAttribute( ATT_MESSAGE, message );
+        request.setAttribute( ATT_CLIENT, client );
+        request.setAttribute( ATT_ERREUR, erreur );
 
-	}
+        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    }
 
-	}
+    protected void doPost( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException {
+    }
 
 }

@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,24 +6,19 @@
 </head>
 <body>
 
-	<h1>Information Client</h1>
-	<p> ${message} </p>
-	<p>
+	<c:import url="/inc/menu.jsp"></c:import>
+		
+	<p>${message}</p>
 	
-	${client.nom}
-	<br/>
+	<c:if test="${!erreur}">
 	
-	${client.prenom}
-	<br/>
+	<p> <c:out value="${client.nom}"></c:out> </p>
+	<p> <c:out value="${client.prenom}"></c:out> </p>
+	<p> <c:out value="${client.adresse}"></c:out> </p>
+	<p> <c:out value="${client.telephone}"></c:out> </p>
+	<p> <c:out value="${client.email}"></c:out> </p>
+		
+	</c:if>
 	
-	${client.adresse }
-	<br/>
-	
-	${client.telephone }
-	<br/>
-	
-	${client.email}
-	</p>
-
 </body>
 </html>
