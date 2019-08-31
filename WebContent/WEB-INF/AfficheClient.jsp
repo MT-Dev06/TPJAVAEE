@@ -8,17 +8,13 @@
 
 	<c:import url="/inc/menu.jsp"></c:import>
 		
-	<p>${message}</p>
-	
-	<c:if test="${!erreur}">
+	<p>${form.resultat}</p>
 	
 	<p> <c:out value="${client.nom}"></c:out> </p>
 	<p> <c:out value="${client.prenom}"></c:out> </p>
 	<p> <c:out value="${client.adresse}"></c:out> </p>
 	<p> <c:out value="${client.telephone}"></c:out> </p>
 	<p> <c:out value="${client.email}"></c:out> </p>
-		
-	</c:if>
-	
+			
 </body>
 </html>

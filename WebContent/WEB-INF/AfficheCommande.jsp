@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +6,9 @@
 </head>
 <body>
 
-<c:import url="inc/menu.jsp"></c:import>
-
-<p> ${message} </p>
-
-
-<c:if test="${!erreur}">
+<c:import url="/inc/menu.jsp"></c:import>
+		
+	<p>${form.resultat}</p>
 
 		<p> <c:out value="${commande.client.nom }"></c:out> </p>
 		<p> <c:out value="${commande.client.prenom }"></c:out> </p>
@@ -28,7 +23,6 @@
 		<p> <c:out value="${commande.modeLivraison }"></c:out> </p>
 		<p> <c:out value="${commande.statuLivraison }"></c:out> </p>
 
-</c:if>
 
 </body>
 </html>
